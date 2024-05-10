@@ -28,4 +28,4 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/craftville/network-images:java-21
+            ghcr.io/esmaay/network-images:java-21
