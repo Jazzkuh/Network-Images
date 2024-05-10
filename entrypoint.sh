@@ -22,8 +22,8 @@ PARSED=$(echo "${STARTUP}" | sed -e 's/{{/${/g' -e 's/}}/}/g' | eval echo "$(cat
 printf "\033[1m\033[33mcontainer@pterodactyl~ \033[0m%s\n" "$PARSED"
 # shellcheck disable=SC2086
 
-# wget -r -np -q -nH --cut-dirs=2 --reject index.html,index.html.tmp "http://172.18.0.7/global/server" &
-# wait $!
+wget -r -np --no-parent -q -nH --cut-dirs=2 --reject index.html,index.html.tmp --accept "*.*" "http://172.18.0.7/global/server" &
+wait $!
 
 if [ -n "$TEMPLATES" ]; then
     IFS=',' read -r -a templates <<< "$TEMPLATES"
