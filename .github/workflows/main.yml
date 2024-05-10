@@ -1,4 +1,4 @@
-name: build java
+name: Deploy
 on:
   workflow_dispatch:
   push:
@@ -28,4 +28,4 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/Esmaay/CV-Java17:Java17
+            ghcr.io/Esmaay/network-images:java-21
