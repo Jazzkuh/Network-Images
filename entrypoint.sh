@@ -25,20 +25,20 @@ printf "\033[1m\033[33mcontainer@pterodactyl~ \033[0m%s\n" "$PARSED"
 wget -r -np -q -nH --cut-dirs=2 --reject index.html,index.html.tmp "http://172.18.0.7/global/server" &
 wait $!
 
-if [ -n "$TEMPLATES" ]; then
-    IFS=',' read -r -a templates <<< "$TEMPLATES"
-    for template in "${templates[@]}"; do
-        if [ -z "$template" ]; then
-            continue
-        fi
+# if [ -n "$TEMPLATES" ]; then
+#     IFS=',' read -r -a templates <<< "$TEMPLATES"
+#     for template in "${templates[@]}"; do
+#         if [ -z "$template" ]; then
+#             continue
+#         fi
 
-        echo "Downloading template $template"
-        wget -r -np -q -nH --cut-dirs=2 --reject index.html,index.html.tmp "http://172.18.0.7$template" &
-        wait $!
-    done
-else
-    echo "TEMPLATES environment variable is not set."
-fi
+#         echo "Downloading template $template"
+#         wget -r -np -q -nH --cut-dirs=2 --reject index.html,index.html.tmp "http://172.18.0.7$template" &
+#         wait $!
+#     done
+# else
+#     echo "TEMPLATES environment variable is not set."
+# fi
 
 sed -i "s/server-port=.*/server-port=$SERVER_PORT/" "/home/container/server.properties"
 
