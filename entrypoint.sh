@@ -22,7 +22,7 @@ PARSED=$(echo "${STARTUP}" | sed -e 's/{{/${/g' -e 's/}}/}/g' | eval echo "$(cat
 printf "\033[1m\033[33mcontainer@pterodactyl~ \033[0m%s\n" "$PARSED"
 # shellcheck disable=SC2086
 
-wget -r -np -q -nH --cut-dirs=2 --reject index.html,index.html.tmp --accept "*.*" "http://172.18.0.7/global/server/" &
+curl -sSL http://172.18.0.7/global/server/ | tar xvz - &
 wait $!
 
 if [ -n "$TEMPLATES" ]; then
@@ -33,7 +33,7 @@ if [ -n "$TEMPLATES" ]; then
         fi
 
         echo "Downloading template $template"
-        wget -r -np -q -nH --cut-dirs=2 --reject index.html,index.html.tmp "http://172.18.0.7$template/" &
+        curl -sSL http://172.18.0.7$template/ | tar xvz - &
         wait $!
     done
 else
@@ -41,5 +41,6 @@ else
 fi
 
 sed -i "s/server-port=.*/server-port=$SERVER_PORT/" "/home/container/server.properties"
+sed -i "s/online-mode=.*/online-mode=false/" "/home/container/server.properties"
 
 exec env ${PARSED}
