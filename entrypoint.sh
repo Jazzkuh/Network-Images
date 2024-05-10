@@ -28,6 +28,10 @@ wait $!
 if [ -n "$TEMPLATES" ]; then
     IFS=',' read -r -a templates <<< "$TEMPLATES"
     for template in "${templates[@]}"; do
+        if [ -z "$template" ]; then
+            continue
+        fi
+
         echo "Downloading template $template"
         wget -r -np -q -nH --cut-dirs=2 --reject index.html,index.html.tmp "http://172.18.0.7$template" &
         wait $!
