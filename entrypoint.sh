@@ -22,7 +22,7 @@ PARSED=$(echo "${STARTUP}" | sed -e 's/{{/${/g' -e 's/}}/}/g' | eval echo "$(cat
 printf "\033[1m\033[33mcontainer@pterodactyl~ \033[0m%s\n" "$PARSED"
 # shellcheck disable=SC2086
 
-wget -r -np --no-parent -q -nH --cut-dirs=1 --reject index.html,index.html.tmp --accept "*.*" "http://172.18.0.7/global/server" &
+wget -r -np -q -nH --cut-dirs=2 --reject index.html,index.html.tmp --accept "*.*" "http://172.18.0.7/global/server/" &
 wait $!
 
 if [ -n "$TEMPLATES" ]; then
@@ -33,7 +33,7 @@ if [ -n "$TEMPLATES" ]; then
         fi
 
         echo "Downloading template $template"
-        wget -r -np -q -nH --cut-dirs=1 --reject index.html,index.html.tmp "http://172.18.0.7$template" &
+        wget -r -np -q -nH --cut-dirs=2 --reject index.html,index.html.tmp "http://172.18.0.7$template/" &
         wait $!
     done
 else
