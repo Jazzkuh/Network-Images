@@ -33,7 +33,7 @@ if [ -n "$TEMPLATES" ]; then
         fi
 
         echo "Downloading template $template"
-        wget -r -np -q -nH --cut-dirs=2 --reject index.html,index.html.tmp "$TEMPLATE_URL/$template/" &
+        wget -r -np -q -nH --cut-dirs=2 --reject index.html,index.html.tmp "$TEMPLATE_URL$template/" &
         wait $!
     done
 else
