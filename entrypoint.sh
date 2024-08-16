@@ -45,9 +45,6 @@ else
     echo "TEMPLATES environment variable is not set."
 fi
 
-sed -i "s/server-port=.*/server-port=$SERVER_PORT/" "/home/container/server.properties"
-sed -i "s/online-mode=.*/online-mode=false/" "/home/container/server.properties"
-
 if [[ "$GLOBAL_FOLDER" == *"spigot"* ]]; then
     sed -i "s/server-port=.*/server-port=$SERVER_PORT/" "/home/container/server.properties"
     sed -i "s/online-mode=.*/online-mode=false/" "/home/container/server.properties"
